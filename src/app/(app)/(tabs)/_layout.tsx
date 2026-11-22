@@ -8,6 +8,8 @@ import { colors } from '@/theme';
 type IconName = ComponentProps<typeof Ionicons>['name'];
 
 function tabIcon(name: IconName, focusedName: IconName) {
+  // ESLint wants every component to have a name. This small inline icon does not need one.
+  // eslint-disable-next-line react/display-name
   return ({ color, focused, size }: { color: ColorValue; focused: boolean; size: number }) => (
     <Ionicons name={focused ? focusedName : name} size={size} color={color as string} />
   );

@@ -41,3 +41,13 @@ example
 # generated native folders
 /ios
 /android
+
+# Firebase / secrets: never push keys or config files with passwords to GitHub
+.env
+.env.*
+!.env.example
+google-services.json
+GoogleService-Info.plist
+
+# Test coverage reports (created by "jest --coverage")
+coverage/

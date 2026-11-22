@@ -1,56 +1,73 @@
-# Welcome to your Expo app 👋
+# My Better Health — Mobile Nutrition Tracker
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile app (Android) that helps users track daily calories and nutrition.
+Users can search food products, scan barcodes, log meals, follow daily goals
+and review their eating habits.
 
-## Get started
+> Course project for **Mobile Programming (SOF008AS3AE-3007)**,
+> Haaga-Helia University of Applied Sciences. Author: **Minh Doan**
 
-1. Install dependencies
+## Tech stack
 
-   ```bash
-   npm install
-   ```
+| Area            | Technology                                      |
+| --------------- | ----------------------------------------------- |
+| Framework       | React Native + Expo (SDK 58)                    |
+| Language        | TypeScript (strict mode)                        |
+| Navigation      | Expo Router (file-based, protected routes)      |
+| Authentication  | Firebase Authentication (email + password)      |
+| Database        | Cloud Firestore + security rules                |
+| Food data       | Open Food Facts REST API                        |
+| Device features | Expo Camera (barcode), Expo Notifications       |
+| Testing         | Jest + jest-expo                                |
+| Code quality    | ESLint (eslint-config-expo)                     |
 
-2. Start the app
+## Features
 
-   ```bash
-   npx expo start
-   ```
+- App structure: navigation, protected routes, reusable UI components
+- Form validation with strong password rules
+- User authentication with Firebase: register, log in, log out, reset password
+- Daily dashboard: calories, protein, carbs, fat and progress toward goals
+- Food search with the Open Food Facts API
+- Meal tracking: add, edit and delete food for breakfast, lunch, dinner and snacks
+- Barcode scanner
+- Meal history and charts
+- Settings: nutrition goals and meal reminders
 
-In the output, you'll find options to open the app in a
+## Project structure
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+src/
+├── app/            # Screens (Expo Router: every file is a route)
+│   ├── (auth)/     # Sign in, Sign up, Forgot password
+│   └── (app)/      # Logged-in area: tabs, food details, scanner
+├── components/     # Reusable UI components
+├── constants/      # Default goals and labels
+├── providers/      # React context (authentication)
+├── theme/          # Colors, spacing, font sizes
+├── types/          # Shared TypeScript models
+└── utils/          # Pure functions + unit tests
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Screens only show the UI. Logic is in `utils/` (tested) and `services/` (API and database).
 
-### Other setup steps
+## Getting started
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Requirements: Node.js 20+ and the **Expo Go** app on your phone
+(signed in with an Expo account).
 
-## Learn more
+```bash
+npm install
+npx expo login      # sign in to your Expo account
+npx expo start      # scan the QR code with Expo Go
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npm test            # unit tests
+npm run lint        # ESLint
+npm run typecheck   # TypeScript check
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Data source
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Food data comes from [Open Food Facts](https://world.openfoodfacts.org),
+an open database under the Open Database License (ODbL).

@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { StyleSheet } from 'react-native';
 import { PasswordChecklist } from '@/components/PasswordChecklist';
 import { AppText, Button, Screen, TextField } from '@/components/ui';
 import { useAuth } from '@/providers/AuthProvider';
 import { colors, spacing } from '@/theme';
+import { getAuthErrorMessage } from '@/utils/authErrors';
 import { validateEmail, validateNewPassword, validatePasswordMatch } from '@/utils/validation';
+import { useState } from 'react';
+import { StyleSheet } from 'react-native';
 
 type FormErrors = { email?: string; password?: string; confirm?: string; form?: string };
 
@@ -29,8 +30,8 @@ export default function SignUpScreen() {
     setLoading(true);
     try {
       await signUp(email.trim(), password, name.trim() || undefined);
-    } catch {
-      setErrors({ form: 'Could not create the account. Please try again.' });
+    } catch (error) {
+      setErrors({ form: getAuthErrorMessage(error) });
     } finally {
       setLoading(false);
     }

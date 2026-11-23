@@ -6,6 +6,7 @@ import { StyleSheet, View } from 'react-native';
 import { AppText, Button, Screen, TextField } from '@/components/ui';
 import { useAuth } from '@/providers/AuthProvider';
 import { colors, spacing } from '@/theme';
+import { getAuthErrorMessage } from '@/utils/authErrors';
 import { validateEmail, validatePassword } from '@/utils/validation';
 
 export default function SignInScreen() {
@@ -24,8 +25,8 @@ export default function SignInScreen() {
     try {
       await signIn(email.trim(), password);
 
-    } catch {
-      setErrors({ form: 'Sign in failed. Please try again.' });
+    } catch (error) {
+      setErrors({ form: getAuthErrorMessage(error) });
     } finally {
       setLoading(false);
     }

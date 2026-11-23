@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { AppText, Button, Card, Screen, TextField } from '@/components/ui';
 import { useAuth } from '@/providers/AuthProvider';
 import { colors, spacing } from '@/theme';
+import { getAuthErrorMessage } from '@/utils/authErrors';
 import { validateEmail } from '@/utils/validation';
 
 export default function ForgotPasswordScreen() {
@@ -22,8 +23,8 @@ export default function ForgotPasswordScreen() {
     try {
       await resetPassword(email.trim());
       setSent(true);
-    } catch {
-      setError('Could not send the email. Please try again.');
+    } catch (error) {
+      setError(getAuthErrorMessage(error));
     } finally {
       setLoading(false);
     }

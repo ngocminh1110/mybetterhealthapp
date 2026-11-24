@@ -12,7 +12,7 @@ export interface Nutrients {
 export type NutritionGoals = Nutrients;
 
 export interface FoodProduct {
-  code: string; 
+  code: string;
   name: string;
   brand?: string;
   imageUrl?: string;
@@ -21,13 +21,14 @@ export interface FoodProduct {
 
 export interface MealEntry {
   id: string;
-  date: string; 
+  date: string;
   mealType: MealType;
   foodCode: string;
   foodName: string;
   brand?: string;
-  grams: number; 
-  nutrients: Nutrients; 
+  grams: number;
+  per100g: Nutrients;
+  nutrients: Nutrients;
   createdAt: number;
 }
 
